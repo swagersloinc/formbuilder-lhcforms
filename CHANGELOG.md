@@ -2,6 +2,35 @@
 
 This project follows [Semantic Versioning](http://semver.org/).
 
+## [2.1.2]  2018-11-27
+### Fixed.
+-  Add google analytics to white list of content security policy.
+
+## [2.1.1]  2018-11-27
+### Fixed.
+-  Fix bower package name.
+
+## [2.1.0]  2018-10-29
+### Added.
+-  Support to export and import FHIR Questionnaire to local disk.
+
+## [2.0.0]  2018-10-29
+### Changed.
+- Changed module exports of the server. Newly exported functions 
+will help to pre-configure the express app with customized middlewares before doing 
+form builder specific configurations. 
+
+This is a breaking change due to signature changes in import/require statements if using
+this as an npm package.
+
+## [1.0.4]  2018-10-17
+### Fixed
+- Fixed bower packaging issues.
+
+## [1.0.3]  2018-10-05
+### Fixed
+- Fixed npm audited vulnerabilities.
+
 ## [1.0.2]  2018-10-02
 ### Added
 - In units field, units associated with item's loinc property are 

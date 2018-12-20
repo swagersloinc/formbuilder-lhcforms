@@ -10,11 +10,8 @@ module.exports = function (grunt) {
     express: 'grunt-express-server',
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
-    cdnify: 'grunt-google-cdn',
     protractor: 'grunt-protractor-runner',
     injector: 'grunt-asset-injector',
-    buildcontrol: 'grunt-build-control',
-    nsp: 'grunt-nsp'
   });
 
   var serverFiles = [
@@ -67,11 +64,6 @@ module.exports = function (grunt) {
       server: {
         url: envConfig.https ? 'https://<%= yeoman.host %>:<%= express.options.port %>' : 'http://<%= yeoman.host %>:<%= express.options.port %>'
       }
-    },
-
-    nsp: {
-      package: grunt.file.readJSON('./package.json'),
-      shrinkwrap: grunt.file.readJSON('./package-lock.json')
     },
 
     watch: {
@@ -309,17 +301,6 @@ module.exports = function (grunt) {
     },
 
     // The following *-min tasks produce minified files in the dist folder
-    imagemin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.client %>/assets/images',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= yeoman.dist %>/public/assets/images'
-        }]
-      }
-    },
-
     svgmin: {
       dist: {
         files: [{
@@ -372,13 +353,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // Replace Google CDN references
-    cdnify: {
-      dist: {
-        html: ['<%= yeoman.dist %>/public/*.html']
-      }
-    },
-
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
@@ -425,28 +399,6 @@ module.exports = function (grunt) {
       }
     },
 
-    buildcontrol: {
-      options: {
-        dir: 'dist',
-        commit: true,
-        push: true,
-        connectCommits: false,
-        message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
-      },
-      heroku: {
-        options: {
-          remote: 'heroku',
-          branch: 'master'
-        }
-      },
-      openshift: {
-        options: {
-          remote: 'openshift',
-          branch: 'master'
-        }
-      }
-    },
-
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
@@ -463,7 +415,6 @@ module.exports = function (grunt) {
         }
       },
       dist: [
-        'imagemin',
         'svgmin'
       ]
     },
@@ -735,7 +686,6 @@ module.exports = function (grunt) {
       'concat',
       'ngAnnotate',
       'copy:dist',
-      'cdnify',
       'cssmin',
       'uglify',
       'rev',
